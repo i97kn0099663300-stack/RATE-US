@@ -4,11 +4,13 @@ import os
 from datetime import datetime
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from urllib.parse import urlparse
 
 app = Flask(__name__, static_folder='.')
 DATA_FILE = 'data.json'
 DATABASE_URL = os.environ.get('DATABASE_URL')
+
+def use_db():
+    return bool(DATABASE_URL)
 
 def get_db():
     conn = psycopg2.connect(DATABASE_URL)
@@ -40,8 +42,8 @@ def init_db():
     cur.close()
     conn.close()
 
-def use_db():
-    return bool(DATABASE_URL)
+if use_db():
+    init_db()
 
 # --- Data helpers ---
 
@@ -227,7 +229,5 @@ def delete_rating(rating_id):
     return jsonify({'message': 'تم الحذف'})
 
 if __name__ == '__main__':
-    if use_db():
-        init_db()
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
