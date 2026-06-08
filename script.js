@@ -90,7 +90,7 @@ function renderRatings(ratings) {
 async function deleteRating(id) {
   if (!confirm('هل أنت متأكد من حذف التقييم؟')) return;
   await api(`/api/ratings/${id}`, { method: 'DELETE' });
-  await refreshUI();
+  await safeRefreshUI();
 }
 
 async function refreshUI() {
@@ -106,13 +106,23 @@ async function refreshUI() {
   renderAdminStats(stats);
 }
 
+async function safeRefreshUI() {
+  try {
+    await refreshUI();
+  } catch (err) {
+    document.getElementById('ratingsContainer').innerHTML =
+      '<div class="no-ratings">⚠️ تعذر الاتصال بالخادم</div>';
+  }
+}
+
 // --- Form ---
 document.getElementById('ratingForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const admin = document.getElementById('adminSelect').value;
   const rating = parseInt(document.getElementById('ratingValue').value);
   const comment = document.getElementById('comment').value.trim();
-  if (!admin || !rating) return;
+  if (!admin) { alert('اختر الإداري أولاً'); return; }
+  if (!rating) { alert('اختر التقييم بالنجوم'); return; }
   try {
     await api('/api/ratings', {
       method: 'POST',
@@ -120,7 +130,7 @@ document.getElementById('ratingForm').addEventListener('submit', async function(
     });
     this.reset();
     document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
-    await refreshUI();
+    await safeRefreshUI();
   } catch (err) {
     alert(err.message);
   }
@@ -186,7 +196,7 @@ async function deleteAdmin(name) {
   }
   await api(`/api/admins/${encodeURIComponent(name)}`, { method: 'DELETE' });
   await renderAdminList();
-  await refreshUI();
+  await safeRefreshUI();
 }
 
 document.getElementById('addAdminBtn').addEventListener('click', async function() {
@@ -200,7 +210,7 @@ document.getElementById('addAdminBtn').addEventListener('click', async function(
     });
     input.value = '';
     await renderAdminList();
-    await refreshUI();
+    await safeRefreshUI();
   } catch (err) {
     alert(err.message);
   }
@@ -211,4 +221,4 @@ document.getElementById('newAdmin').addEventListener('keypress', function(e) {
 });
 
 // --- Init ---
-refreshUI();
+safeRefreshUI();
