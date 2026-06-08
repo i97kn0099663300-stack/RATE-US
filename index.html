@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RATE US — تقييم الإداريين</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⭐ RATE US</h1>
+      <p>قيّم أداء الإداريين — صوتك يفرق</p>
+    </header>
+
+    <section class="add-rating">
+      <h2>إضافة تقييم جديد</h2>
+      <form id="ratingForm">
+        <div class="form-group">
+          <label for="adminSelect">اختر الإداري</label>
+          <select id="adminSelect" required>
+            <option value="">-- اختر --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>التقييم</label>
+          <div class="stars" id="starRating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <input type="hidden" id="ratingValue" required>
+        </div>
+
+        <div class="form-group">
+          <label for="comment">تعليقك</label>
+          <textarea id="comment" rows="3" placeholder="اكتب تعليقك هنا..."></textarea>
+        </div>
+
+        <button type="submit">إرسال التقييم</button>
+      </form>
+    </section>
+
+    <section class="ratings-list">
+      <h2>التقييمات</h2>
+      <div class="filters">
+        <select id="filterAdmin">
+          <option value="all">جميع الإداريين</option>
+        </select>
+      </div>
+      <div id="ratingsContainer"></div>
+    </section>
+  </div>
+
+  <div class="modal" id="adminModal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2>إدارة الإداريين</h2>
+      <div class="form-group">
+        <label for="newAdmin">إضافة إداري جديد</label>
+        <div class="input-row">
+          <input type="text" id="newAdmin" placeholder="اسم الإداري">
+          <button id="addAdminBtn" class="btn-small">إضافة</button>
+        </div>
+      </div>
+      <ul id="adminList"></ul>
+    </div>
+  </div>
+
+  <button id="manageAdminsBtn" class="fab">⚙️</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
