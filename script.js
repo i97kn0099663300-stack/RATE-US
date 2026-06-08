@@ -55,7 +55,7 @@ function renderAdminStats(stats) {
   const container = document.querySelector('.admin-stats') || createStatsContainer();
   const ranked = sortByRank(stats);
   container.innerHTML = ranked.map((s, i) => `
-    <div class="admin-stat-card">
+    <div class="admin-stat-card ${i < 3 && s.count > 0 ? 'rank-' + (i+1) : ''}">
       ${i === 0 && s.count > 0 ? '<span class="crown-badge">👑</span>' : ''}
       <div class="stat-name">${s.admin}</div>
       <div class="stat-stars">${renderStars(Math.round(s.avg))}</div>

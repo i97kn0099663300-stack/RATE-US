@@ -429,9 +429,9 @@ button:hover {
 
 /* Rank 1 — Gold */
 .lb-row.rank-1 {
-  background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(255,180,0,0.06));
-  border: 1px solid rgba(255,215,0,0.3);
-  box-shadow: 0 0 30px rgba(255,215,0,0.08);
+  background: linear-gradient(135deg, #2a2410, #1f1a0a);
+  border: 1px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255,215,0,0.12), inset 0 0 30px rgba(255,215,0,0.03);
 }
 
 .lb-row.rank-1 .lb-rank {
@@ -450,8 +450,9 @@ button:hover {
 
 /* Rank 2 — Silver */
 .lb-row.rank-2 {
-  background: linear-gradient(135deg, rgba(192,192,192,0.08), rgba(160,160,160,0.04));
-  border: 1px solid rgba(192,192,192,0.2);
+  background: linear-gradient(135deg, #1e2028, #16171d);
+  border: 1px solid #8a8fa8;
+  box-shadow: 0 0 20px rgba(192,192,192,0.06), inset 0 0 20px rgba(192,192,192,0.02);
 }
 
 .lb-row.rank-2 .lb-rank {
@@ -469,8 +470,9 @@ button:hover {
 
 /* Rank 3 — Bronze */
 .lb-row.rank-3 {
-  background: linear-gradient(135deg, rgba(205,127,50,0.08), rgba(180,110,40,0.04));
-  border: 1px solid rgba(205,127,50,0.2);
+  background: linear-gradient(135deg, #221a12, #1a1410);
+  border: 1px solid #8a5a28;
+  box-shadow: 0 0 20px rgba(205,127,50,0.06), inset 0 0 20px rgba(205,127,50,0.02);
 }
 
 .lb-row.rank-3 .lb-rank {
@@ -600,26 +602,61 @@ button:hover {
 
 /* Winner badge on stat cards */
 .admin-stat-card {
-  background: #101720;
-  border: 1px solid rgba(0, 131, 143, 0.12);
   border-radius: 10px;
   padding: 15px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   position: relative;
 }
 
 .admin-stat-card:hover {
-  border-color: rgba(0, 229, 255, 0.2);
+  border-color: rgba(0, 229, 255, 0.2) !important;
   box-shadow: 0 4px 20px rgba(0, 229, 255, 0.06);
+}
+
+.admin-stat-card.rank-1 {
+  background: linear-gradient(135deg, #2a2410, #1f1a0a);
+  border: 1px solid #ffd700;
+  box-shadow: 0 0 30px rgba(255,215,0,0.08), inset 0 0 30px rgba(255,215,0,0.02);
+}
+
+.admin-stat-card.rank-1 .stat-name {
+  color: #ffd700;
+  text-shadow: 0 0 20px rgba(255,215,0,0.2);
+}
+
+.admin-stat-card.rank-2 {
+  background: linear-gradient(135deg, #1e2028, #16171d);
+  border: 1px solid #8a8fa8;
+}
+
+.admin-stat-card.rank-2 .stat-name {
+  color: #c0c0c0;
+}
+
+.admin-stat-card.rank-3 {
+  background: linear-gradient(135deg, #221a12, #1a1410);
+  border: 1px solid #8a5a28;
+}
+
+.admin-stat-card.rank-3 .stat-name {
+  color: #cd7f32;
+}
+
+.admin-stat-card:not(.rank-1):not(.rank-2):not(.rank-3) {
+  background: #101720;
+  border: 1px solid rgba(0, 131, 143, 0.12);
+}
+
+.admin-stat-card:not(.rank-1):not(.rank-2):not(.rank-3) .stat-name {
+  color: #00E5FF;
+  text-shadow: 0 0 15px rgba(0, 229, 255, 0.12);
 }
 
 .admin-stat-card .stat-name {
   font-weight: 700;
-  color: #00E5FF;
   margin-bottom: 5px;
-  text-shadow: 0 0 15px rgba(0, 229, 255, 0.12);
 }
 
 .admin-stat-card .stat-stars .star {
